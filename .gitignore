@@ -65,4 +65,8 @@ node_modules/
 # dotenv environment variables file
 .env
 
+# deploy folder
 /dist/
+
+# batch files for easier debugging and deployment
+*.bat

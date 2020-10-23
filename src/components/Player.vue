@@ -1,6 +1,7 @@
 <template>
   <div>
-    <input v-model="name" placeholder="(Name)" />
+    <button v-on:click="this.$emit('delete')">x</button>
+    <div class="name">{{ player.name }}</div>
     <div>Punkte: {{ points }}</div>
     <div>Diese Runde: {{ pointsRound }}</div>
     <input
@@ -42,10 +43,10 @@ import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "Player",
-  props: {},
+  props: ["player"],
   data: function() {
     return {
-      name: "(Name)",
+      name: this.$props.player.name,
       points: 0,
       pointsRound: 0,
       pointsAdd: 0

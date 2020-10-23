@@ -1,24 +1,40 @@
 <template>
-  <div><Player /></div>
-  <div><Player /></div>
-  <div><Player /></div>
-  <div><Player /></div>
-  <div><Player /></div>
-  <div><Player /></div>
-  <div><Player /></div>
-  <div><Player /></div>
-  <div><Player /></div>
-  <div><Player /></div>
+  <div v-bind:key="player.name" v-for="player in players">
+    <PlayerComponent
+      v-bind:player="player"
+      v-on:delete="removePlayer(player)"
+    />
+  </div>
+  <button v-on:click="addPlayer">
+    +
+  </button>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import Player from "./components/Player.vue";
+import PlayerComponent from "./components/Player.vue";
+import { Player } from "./data-objects/player";
 
 export default defineComponent({
   name: "App",
   components: {
-    Player
+    PlayerComponent
+  },
+  data: function() {
+    return {
+      players: [new Player("Spieler 1")]
+    };
+  },
+  methods: {
+    addPlayer: function() {
+      this.players.push(new Player("Neuer Spieler"));
+    },
+    removePlayer: function(player: Player) {
+      const index = this.players.indexOf(player);
+      if (index >= 0) {
+        this.players.splice(index, 1);
+      }
+    }
   }
 });
 </script>
