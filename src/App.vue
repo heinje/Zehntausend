@@ -1,14 +1,14 @@
 <template>
-  <Player />
-  <Player />
-  <Player />
-  <Player />
-  <Player />
-  <Player />
-  <Player />
-  <Player />
-  <Player />
-  <Player />
+  <div><Player /></div>
+  <div><Player /></div>
+  <div><Player /></div>
+  <div><Player /></div>
+  <div><Player /></div>
+  <div><Player /></div>
+  <div><Player /></div>
+  <div><Player /></div>
+  <div><Player /></div>
+  <div><Player /></div>
 </template>
 
 <script lang="ts">
