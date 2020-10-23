@@ -15,7 +15,7 @@
         pointsAdd = 0;
       "
     >
-      Neuer Wurf
+      Weiter
     </button>
     <button
       v-on:click="
@@ -24,7 +24,7 @@
         pointsAdd = 0;
       "
     >
-      &Uuml;bernehmen
+      Passe!
     </button>
     <button
       v-on:click="
@@ -32,7 +32,7 @@
         pointsAdd = 0;
       "
     >
-      Zur&uuml;cksetzen
+      Tot!
     </button>
   </div>
 </template>
