@@ -3,10 +3,20 @@
     <PlayerComponent
       v-bind:player="player"
       v-on:delete="removePlayer(player)"
+      v-on:new-name="player.name = $event"
+      v-on:points-round-added="player.pointsRound += $event"
+      v-on:points-lost="player.pointsRound = 0"
+      v-on:points-taken="
+        player.points += $event + player.pointsRound;
+        player.pointsRound = 0;
+      "
     />
   </div>
   <button v-on:click="addPlayer">
-    +
+    Spieler hinzuf&uuml;gen
+  </button>
+  <button v-on:click="reset">
+    Punkte zur&uuml;cksetzen
   </button>
 </template>
 
@@ -22,7 +32,7 @@ export default defineComponent({
   },
   data: function() {
     return {
-      players: [new Player("Spieler 1")]
+      players: [new Player("Neuer Spieler")]
     };
   },
   methods: {
@@ -34,6 +44,11 @@ export default defineComponent({
       if (index >= 0) {
         this.players.splice(index, 1);
       }
+    },
+    reset: function() {
+      this.players.forEach(player => {
+        player.points = 0;
+      });
     }
   }
 });

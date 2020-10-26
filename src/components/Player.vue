@@ -1,9 +1,38 @@
 <template>
   <div>
-    <button v-on:click="this.$emit('delete')">x</button>
-    <div class="name">{{ player.name }}</div>
-    <div>Punkte: {{ points }}</div>
-    <div>Diese Runde: {{ pointsRound }}</div>
+    <button v-on:click="this.$emit('delete')">
+      Spieler löschen
+    </button>
+    <div v-bind:style="{ display: isEditing ? 'none' : '' }">
+      {{ player.name }}
+    </div>
+    <button
+      v-on:click="isEditing = true"
+      v-bind:style="{ display: isEditing ? 'none' : '' }"
+    >
+      Bearbeiten
+    </button>
+    <input v-model="name" v-bind:style="{ display: isEditing ? '' : 'none' }" />
+    <button
+      v-on:click="
+        isEditing = false;
+        $emit('new-name', name);
+      "
+      v-bind:style="{ display: isEditing ? '' : 'none' }"
+    >
+      Ok
+    </button>
+    <button
+      v-on:click="
+        isEditing = false;
+        name = player.name;
+      "
+      v-bind:style="{ display: isEditing ? '' : 'none' }"
+    >
+      Abbrechen
+    </button>
+    <div>Punkte: {{ player.points }}</div>
+    <div>Diese Runde: {{ player.pointsRound }}</div>
     <input
       type="number"
       v-model="pointsAdd"
@@ -12,7 +41,7 @@
     />
     <button
       v-on:click="
-        pointsRound = Number(pointsRound) + Number(pointsAdd);
+        $emit('points-round-added', Number(pointsAdd));
         pointsAdd = 0;
       "
     >
@@ -20,8 +49,7 @@
     </button>
     <button
       v-on:click="
-        points = Number(points) + Number(pointsRound) + Number(pointsAdd);
-        pointsRound = 0;
+        $emit('points-taken', Number(pointsAdd));
         pointsAdd = 0;
       "
     >
@@ -29,7 +57,7 @@
     </button>
     <button
       v-on:click="
-        pointsRound = 0;
+        $emit('points-lost');
         pointsAdd = 0;
       "
     >
@@ -47,8 +75,7 @@ export default defineComponent({
   data: function() {
     return {
       name: this.$props.player.name,
-      points: 0,
-      pointsRound: 0,
+      isEditing: false,
       pointsAdd: 0
     };
   }
