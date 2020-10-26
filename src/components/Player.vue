@@ -55,6 +55,7 @@
     </div>
     <input
       type="number"
+      step="50"
       v-model="pointsAdd"
       placeholder="(Punkte)"
       class="zahl"

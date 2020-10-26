@@ -48,6 +48,7 @@ export default defineComponent({
     reset: function() {
       this.players.forEach(player => {
         player.points = 0;
+        player.pointsRound = 0;
       });
     }
   }
