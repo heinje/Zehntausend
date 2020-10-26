@@ -18,11 +18,7 @@
     >
       <Pencil />
     </button>
-    <input
-      v-model="name"
-      v-bind:style="{ display: isEditing ? '' : 'none' }"
-      class="name"
-    />
+    <input v-model="name" v-bind:style="{ display: isEditing ? '' : 'none' }" />
     <button
       v-on:click="
         isEditing = false;
@@ -49,41 +45,6 @@
       Punkte:
       <div class="punkte">{{ player.points }}</div>
     </div>
-    <div>
-      Diese Runde:
-      <div class="punkte">{{ player.pointsRound }}</div>
-    </div>
-    <input
-      type="number"
-      step="50"
-      v-model="pointsAdd"
-      placeholder="(Punkte)"
-      class="zahl"
-    />
-    <button
-      v-on:click="
-        $emit('points-round-added', Number(pointsAdd));
-        pointsAdd = 0;
-      "
-    >
-      Weiter
-    </button>
-    <button
-      v-on:click="
-        $emit('points-taken', Number(pointsAdd));
-        pointsAdd = 0;
-      "
-    >
-      Passe!
-    </button>
-    <button
-      v-on:click="
-        $emit('points-lost');
-        pointsAdd = 0;
-      "
-    >
-      Tot!
-    </button>
   </div>
 </template>
 
@@ -117,11 +78,6 @@ div {
 }
 input {
   margin: 0 0 0 10px;
-}
-input.zahl {
-  width: 60px;
-}
-input.name {
   width: 160px;
 }
 .name {
