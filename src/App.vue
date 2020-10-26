@@ -1,5 +1,5 @@
 <template>
-  <div v-bind:key="player.name" v-for="player in players">
+  <div v-bind:key="player.name" v-for="player in players" class="player">
     <PlayerComponent
       v-bind:player="player"
       v-on:delete="removePlayer(player)"
@@ -62,5 +62,16 @@ export default defineComponent({
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+button {
+  background-color: whitesmoke;
+  margin: 0 0 0 8px;
+  padding: 2px 4px;
+  border-radius: 6px;
+  text-align: center;
+  vertical-align: middle;
+}
+div.player {
+  margin: 10px 0;
 }
 </style>

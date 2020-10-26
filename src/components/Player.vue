@@ -1,26 +1,38 @@
 <template>
   <div>
-    <button v-on:click="this.$emit('delete')">
-      Spieler löschen
+    <button
+      v-on:click="this.$emit('delete')"
+      class="icon"
+      title="Spieler l&ouml;schen"
+    >
+      <DeleteForever />
     </button>
-    <div v-bind:style="{ display: isEditing ? 'none' : '' }">
+    <div v-bind:style="{ display: isEditing ? 'none' : '' }" class="name">
       {{ player.name }}
     </div>
     <button
       v-on:click="isEditing = true"
       v-bind:style="{ display: isEditing ? 'none' : '' }"
+      class="icon"
+      title="Namen bearbeiten"
     >
-      Bearbeiten
+      <Pencil />
     </button>
-    <input v-model="name" v-bind:style="{ display: isEditing ? '' : 'none' }" />
+    <input
+      v-model="name"
+      v-bind:style="{ display: isEditing ? '' : 'none' }"
+      class="name"
+    />
     <button
       v-on:click="
         isEditing = false;
         $emit('new-name', name);
       "
       v-bind:style="{ display: isEditing ? '' : 'none' }"
+      class="icon"
+      title="&Uuml;bernehmen"
     >
-      Ok
+      <CheckCircle />
     </button>
     <button
       v-on:click="
@@ -28,11 +40,19 @@
         name = player.name;
       "
       v-bind:style="{ display: isEditing ? '' : 'none' }"
+      class="icon"
+      title="Abbrechen"
     >
-      Abbrechen
+      <CloseCircle />
     </button>
-    <div>Punkte: {{ player.points }}</div>
-    <div>Diese Runde: {{ player.pointsRound }}</div>
+    <div>
+      Punkte:
+      <div class="punkte">{{ player.points }}</div>
+    </div>
+    <div>
+      Diese Runde:
+      <div class="punkte">{{ player.pointsRound }}</div>
+    </div>
     <input
       type="number"
       v-model="pointsAdd"
@@ -68,6 +88,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { CheckCircle, CloseCircle, DeleteForever, Pencil } from "mdue";
 
 export default defineComponent({
   name: "Player",
@@ -78,19 +99,38 @@ export default defineComponent({
       isEditing: false,
       pointsAdd: 0
     };
+  },
+  components: {
+    CheckCircle,
+    CloseCircle,
+    DeleteForever,
+    Pencil
   }
 });
 </script>
 
 <style scoped>
 div {
-  display: inline;
-  margin: 10px;
+  display: inline-block;
+  margin: 0 0 0 10px;
 }
-button {
-  margin: 10px;
+input {
+  margin: 0 0 0 10px;
 }
 input.zahl {
   width: 60px;
+}
+input.name {
+  width: 160px;
+}
+.name {
+  display: inline-block;
+  width: 200px;
+  text-align: left;
+}
+.punkte {
+  display: inline-block;
+  width: 60px;
+  text-align: right;
 }
 </style>
